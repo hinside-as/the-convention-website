@@ -1,0 +1,107 @@
+---
+import logoRaw from "../../assets/brand/logo.svg?raw";
+import { primaryNav, ticketCta } from "../../data/nav";
+import Button from "../ui/Button.astro";
+
+const logoSvg = logoRaw.replaceAll('fill="white"', 'fill="currentColor"');
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$/, "") === currentPath;
+---
+
+<header
+  id="site-nav"
+  class="fixed inset-x-0 top-0 z-50 bg-[rgba(20,0,20,0.92)] shadow-[0_1px_24px_rgba(0,0,0,0.35)] backdrop-blur-lg transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+>
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <a
+      href="/"
+      class="min-w-0 shrink text-cyan-100 transition-colors hover:text-magenta [&>svg]:h-[30px] [&>svg]:w-auto"
+      set:html={logoSvg}
+    />
+
+    <input type="checkbox" id="nav-toggle" class="peer hidden" />
+    <label
+      for="nav-toggle"
+      aria-label="Åpne meny"
+      class="relative z-10 flex h-5 w-6 shrink-0 cursor-pointer flex-col justify-between lg:hidden peer-checked:[&>.bar-1]:translate-y-[9px] peer-checked:[&>.bar-1]:rotate-45 peer-checked:[&>.bar-2]:opacity-0 peer-checked:[&>.bar-3]:-translate-y-[9px] peer-checked:[&>.bar-3]:-rotate-45"
+    >
+      <span class="bar-1 h-0.5 w-full rounded-full bg-cyan-100 transition-transform duration-300"></span>
+      <span class="bar-2 h-0.5 w-full rounded-full bg-cyan-100 transition-opacity duration-200"></span>
+      <span class="bar-3 h-0.5 w-full rounded-full bg-cyan-100 transition-transform duration-300"></span>
+    </label>
+
+    <div
+      class="pointer-events-none fixed inset-x-0 top-16 flex h-[calc(100dvh-4rem)] -translate-y-2 flex-col items-center justify-center gap-8 overflow-y-auto bg-[rgba(20,0,20,0.92)] px-4 py-8 opacity-0 backdrop-blur-lg transition-[opacity,transform] duration-300 ease-out peer-checked:pointer-events-auto peer-checked:translate-y-0 peer-checked:opacity-100 lg:static lg:flex lg:h-auto lg:w-auto lg:translate-y-0 lg:flex-row lg:justify-start lg:gap-6 lg:bg-transparent lg:p-0 lg:opacity-100 lg:pointer-events-auto lg:backdrop-blur-none"
+    >
+      {
+        primaryNav.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? "page" : undefined}
+            class:list={[
+              "cursor-pointer font-title text-2xl font-black uppercase transition-colors hover:text-magenta lg:font-body lg:text-base lg:font-bold lg:normal-case",
+              isActive(link.href) ? "text-magenta" : "text-cyan-100",
+            ]}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <Button href={ticketCta.href} external={ticketCta.external} hideArrow size="xs" class="order-first lg:order-none">
+        {ticketCta.label}
+      </Button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const nav = document.getElementById("site-nav");
+  const navToggle = document.getElementById("nav-toggle") as HTMLInputElement | null;
+
+  if (nav && navToggle) {
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const HIDE_THRESHOLD = 80;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+
+      if (!navToggle.checked) {
+        if (currentY > lastY && currentY > HIDE_THRESHOLD) {
+          nav.style.transform = "translateY(-100%)";
+        } else {
+          nav.style.transform = "translateY(0)";
+        }
+      }
+
+      lastY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    });
+
+    // Lock background scroll while the full-screen mobile menu is open.
+    navToggle.addEventListener("change", () => {
+      document.body.style.overflow = navToggle.checked ? "hidden" : "";
+    });
+
+    // Avoid a stuck-open mobile menu (and locked scroll) if the viewport
+    // crosses the desktop breakpoint while the menu is open.
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    desktopQuery.addEventListener("change", (e) => {
+      if (e.matches && navToggle.checked) {
+        navToggle.checked = false;
+        document.body.style.overflow = "";
+      }
+    });
+  }
+</script>

@@ -1,0 +1,20 @@
+---
+import { sponsors } from "../../data/sponsors";
+import SponsorLogo from "../ui/SponsorLogo.astro";
+
+export interface Props {
+  id?: string;
+  bg?: "default" | "panel";
+}
+
+const { id, bg = "default" } = Astro.props;
+---
+
+<section id={id} class:list={["reveal scroll-mt-32 py-32 text-center", bg === "panel" && "bg-purple-900"]}>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 class="font-title text-3xl font-black text-cyan-100">Takk til våre støttespillere</h2>
+    <div class="mt-12 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      {sponsors.map((sponsor) => <SponsorLogo sponsor={sponsor} background="dark" />)}
+    </div>
+  </div>
+</section>

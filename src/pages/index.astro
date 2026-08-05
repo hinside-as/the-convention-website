@@ -1,17 +1,36 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import VideoTextSection from "../components/sections/VideoTextSection.astro";
+import DateVenueBlock from "../components/sections/DateVenueBlock.astro";
+import CountdownTimer from "../components/sections/CountdownTimer.astro";
+import FeatureSection from "../components/sections/FeatureSection.astro";
+import InstagramSection from "../components/sections/InstagramSection.astro";
+import SponsorGrid from "../components/sections/SponsorGrid.astro";
+import GrasrotSection from "../components/sections/GrasrotSection.astro";
+import EmailSignupSection from "../components/sections/EmailSignupSection.astro";
 
+import amongUsIllustration from "../assets/illustrations/among-us.svg?raw";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Hjem"
+  description="The Convention 2026 – Norges triveligste og mest ambisiøse samlingspunkt for gamere, cosplayere, brettspillentusiaster og kreative sjeler."
+>
+  <Hero />
+  <VideoTextSection bg="panel" />
+  <DateVenueBlock />
+  <CountdownTimer bg="panel" />
+  <FeatureSection
+    illustration={amongUsIllustration}
+    illustrationScale={9}
+    heading="Hva skjer på The Convention?"
+    body="Vi har et fullpakket program som passer for alle! Gamingturneringer, brettspill, laser tag og mye mer. Hver kveld avsluttes med et sosialt høydepunkt fra scenen. Da kan det være quiz-gameshow, arcade-battle eller putekrigturnering."
+    ctaLabel="Les mer"
+    ctaHref="/konkurranser"
+  />
+  <InstagramSection bg="panel" />
+  <SponsorGrid bg="default" />
+  <GrasrotSection variant="home" bg="panel" />
+  <EmailSignupSection bg="default" />
+</BaseLayout>

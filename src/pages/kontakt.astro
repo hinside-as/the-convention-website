@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnchorNav from "../components/layout/AnchorNav.astro";
+import PersonCard from "../components/ui/PersonCard.astro";
+import { site } from "../data/site";
+import type { CrewName } from "../data/program";
+
+const anchorItems = [
+  { id: "kontaktinfo", label: "Kontaktinformasjon" },
+  { id: "kart", label: "Kart" },
+  { id: "styret", label: "Styret" },
+  { id: "crew", label: "Crew" },
+];
+
+const officeMapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.org.mapQuery)}&output=embed`;
+const eventMapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.venue.mapQuery)}&output=embed`;
+const orgLookupUrl = `https://virksomhet.brreg.no/nb/oppslag/enheter/${site.org.orgNumber.replace(/\s/g, "")}`;
+
+const styretSeats = Array.from({ length: 6 });
+
+/** Every crew except Core, which doesn't get a public crew-lead listing. */
+const crewNames: CrewName[] = [
+  "Cosplay",
+  "Design",
+  "Game",
+  "Laser tag",
+  "Media",
+  "Scene",
+  "Security",
+  "Shop",
+  "Support",
+  "Technical",
+];
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Kontakt The Convention – kart til kontor og arrangementsted, kontaktinformasjon, styret og crewet bak arrangementet."
+>
+  <div class="mx-auto max-w-4xl px-4 pt-16 text-center sm:px-6">
+    <h1 class="font-title text-3xl font-black text-cyan-100">Kontakt</h1>
+    <div class="mt-4">
+      <AnchorNav items={anchorItems} />
+    </div>
+  </div>
+
+  <section id="kontaktinfo" class="reveal mt-20 scroll-mt-32 bg-purple-900 py-28 text-center">
+    <h2 class="font-title text-2xl font-black text-cyan-100">Kontaktinformasjon</h2>
+    <div class="mx-auto mt-6 flex max-w-sm flex-col gap-2 font-body text-cyan-100">
+      <a href={`tel:${site.org.phone}`} class="cursor-pointer transition-colors hover:text-magenta">
+        {site.org.phoneDisplay}
+      </a>
+      <a href={`mailto:${site.org.email}`} class="cursor-pointer transition-colors hover:text-magenta">
+        {site.org.email}
+      </a>
+      <p class="mt-2">
+        {site.org.addressLine}<br />
+        {site.org.postalCode} {site.org.postalCity}<br />
+        {site.org.country}
+      </p>
+      <a
+        href={orgLookupUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-2 cursor-pointer text-sm transition-colors hover:text-magenta"
+      >
+        Org. nr. {site.org.orgNumber}
+      </a>
+    </div>
+  </section>
+
+  <section id="kart" class="reveal mx-auto max-w-5xl scroll-mt-32 px-4 py-28 sm:px-6">
+    <h2 class="text-center font-title text-2xl font-black text-cyan-100">Kart</h2>
+    <div class="mt-10 grid gap-10 md:grid-cols-2">
+      <div>
+        <h3 class="font-title text-xl font-black text-cyan-100">Arrangementet</h3>
+        <p class="mt-2 font-body text-cyan-100">
+          {site.venue.name}, {site.venue.addressLine}, {site.venue.postalCode} {site.venue.postalCity}
+        </p>
+        <iframe
+          class="mt-4 h-72 w-full rounded-2xl border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src={eventMapSrc}
+          title={`Kart til ${site.venue.name}`}
+        ></iframe>
+      </div>
+      <div>
+        <h3 class="font-title text-xl font-black text-cyan-100">Kontor</h3>
+        <p class="mt-2 font-body text-cyan-100">
+          {site.org.addressLine}, {site.org.postalCode} {site.org.postalCity}
+        </p>
+        <iframe
+          class="mt-4 h-72 w-full rounded-2xl border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src={officeMapSrc}
+          title="Kart til The Conventions kontor"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="styret" class="reveal mx-auto max-w-4xl scroll-mt-32 px-4 py-28 text-center sm:px-6">
+    <h2 class="font-title text-2xl font-black text-cyan-100">Styret</h2>
+    <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
+      {styretSeats.map(() => <PersonCard />)}
+    </div>
+  </section>
+
+  <section id="crew" class="reveal mx-auto max-w-5xl scroll-mt-32 px-4 pb-24 text-center sm:px-6">
+    <h2 class="font-title text-2xl font-black text-cyan-100">Crew</h2>
+    <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-5">
+      {crewNames.map((crew) => <PersonCard role={crew} email="E-post kommer" phone="Telefon kommer" />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnchorNav from "../components/layout/AnchorNav.astro";
+import FeatureSection from "../components/sections/FeatureSection.astro";
+import SponsorGrid from "../components/sections/SponsorGrid.astro";
+import GrasrotSection from "../components/sections/GrasrotSection.astro";
+import Button from "../components/ui/Button.astro";
+import { site } from "../data/site";
+import { socialLinks } from "../data/social";
+
+import lightBulb from "../assets/illustrations/light-bulb.svg?raw";
+import punchOut from "../assets/illustrations/punch-out.svg?raw";
+import sewingMachine from "../assets/illustrations/sewing-machine.svg?raw";
+import sailorMoon from "../assets/illustrations/sailor-moon.svg?raw";
+import treasureMap from "../assets/illustrations/treasure-map.svg?raw";
+import play from "../assets/illustrations/play.svg?raw";
+import claw from "../assets/illustrations/claw.svg?raw";
+import vaultBoy from "../assets/illustrations/vault-boy.svg?raw";
+
+const anchorItems = [
+  { id: "hvorfor", label: "Derfor betyr det noe" },
+  { id: "frivillighet", label: "Frivillighet" },
+  { id: "baerekraft", label: "Bærekraft" },
+  { id: "inkludering", label: "Inkludering" },
+  { id: "grasrotandelen", label: "Grasrotandelen" },
+  { id: "stottespillere", label: "Våre støttespillere" },
+  { id: "slik-kan-du-stotte", label: "Slik kan du støtte oss" },
+  { id: "fremsnakk", label: "Fremsnakk og del" },
+  { id: "behov", label: "Dette trenger vi nå" },
+  { id: "ta-kontakt", label: "Ta kontakt" },
+];
+---
+
+<BaseLayout
+  title="Støtte"
+  description="Bli støttespiller for The Convention – som sponsor, samarbeidspartner eller gjennom Grasrotandelen."
+>
+  <div class="mx-auto max-w-4xl px-4 pt-16 text-center sm:px-6">
+    <h1 class="font-title text-3xl font-black text-cyan-100">Støtte</h1>
+    <div class="mt-4">
+      <AnchorNav items={anchorItems} />
+    </div>
+  </div>
+
+  <FeatureSection
+    id="hvorfor"
+    illustration={lightBulb}
+    illustrationScale={7}
+    heading="Derfor betyr støtten noe"
+    body="The Convention er mye mer enn en helg med gaming og konkurranser – det er stedet der vennskap, kreativitet og mestring møtes. Hvert år samler vi gamere, cosplayere og kreative sjeler i et trygt og inkluderende fellesskap. Men et arrangement i denne størrelsen skjer ikke av seg selv. Støtten fra sponsorer, samarbeidspartnere og frivillige gjør at vi kan holde billettprisene lave, investere i bedre utstyr og gi Kristiansund et arrangement å være stolte av."
+  />
+
+  <FeatureSection
+    id="frivillighet"
+    illustration={punchOut}
+    illustrationScale={3}
+    heading="Drevet av frivillighet"
+    body="The Convention drives i all hovedsak av frivillige – ildsjeler som legger ned et stort antall dugnadstimer før, under og etter arrangementet. Det er verdien av all denne tiden, kompetansen og engasjementet som gjør at vi kan skape en minnerik helg for alle som deltar, år etter år."
+    reverse
+    bg="panel"
+  />
+
+  <FeatureSection
+    id="baerekraft"
+    illustration={sewingMachine}
+    illustrationScale={7}
+    heading="Bærekraft"
+    body="Vi tror på å gi ting nytt liv. Gamle datamaskiner og bortgjemte kontormøbler får en ny sjanse hos oss i stedet for å havne på fylla, og overskuddsmateriell fra byggeprosjekter blir til noe nytt og nyttig. Ved å bruke og gjenbruke det andre er ferdige med, forlenger vi levetiden til alt fra byggematerialer og møbler til teknologi – og gjør The Convention litt mer bærekraftig for hvert år som går."
+  />
+
+  <FeatureSection
+    id="inkludering"
+    illustration={sailorMoon}
+    illustrationScale={5}
+    heading="Inkludering"
+    body="Hos oss handler fellesskap om mer enn å møtes – det handler om å lære av hverandre. Vi introduserer deltakerne våre til avansert bruk av datamaskiner, dingser og verktøy, og oppmuntrer til å finne på egne løsninger – enten det er å bygge sitt eget verkstedbord, pusse opp gamle møbler, eller lage et dataprogram som automatiserer kjedelige oppgaver. Fra programvare, elektronikk og maskinvare til håndverksfag som snekring, logistikk, design og kommunikasjon – hos The Convention er terskelen lav for å prøve noe nytt."
+    reverse
+    bg="panel"
+  />
+
+  <GrasrotSection id="grasrotandelen" variant="full" bg="default" />
+
+  <SponsorGrid id="stottespillere" bg="panel" />
+
+  <FeatureSection
+    id="slik-kan-du-stotte"
+    illustration={treasureMap}
+    illustrationScale={8}
+    heading="Slik kan du støtte oss"
+    body="Vil du bidra? Alt fra økonomiske bidrag og sponsoravtaler til utlån eller donasjon av møbler, dataustyr, premier, transport, mat og andre tjenester gjør en forskjell. Uansett størrelse på bidraget, blir det tatt imot med stor takknemlighet."
+    ctaLabel="Ta kontakt om sponsing"
+    ctaHref={`mailto:${site.org.email}`}
+  />
+
+  <FeatureSection
+    id="fremsnakk"
+    illustration={play}
+    illustrationScale={18}
+    heading="Fremsnakk og del"
+    body="Ikke alt handler om penger og utstyr. Del arrangementet med venner og kollegaer, inviter noen som ikke har vært på LAN før, følg oss i sosiale medier, og fortell gjerne om The Convention til bedrifter og samarbeidspartnere du tror kunne være interessert. Hver eneste del og anbefaling hjelper oss å vokse."
+    reverse
+    bg="panel"
+  >
+    <div class="mt-8 flex flex-wrap gap-3">
+      {
+        socialLinks.map((link) => (
+          <Button href={link.href} external variant="outline" size="sm">
+            {link.label}
+          </Button>
+        ))
+      }
+    </div>
+  </FeatureSection>
+
+  <FeatureSection
+    id="behov"
+    illustration={claw}
+    illustrationScale={4}
+    heading="Dette trenger vi nå"
+    body="Vi oppdaterer denne listen fortløpende med konkrete behov – alt fra utstyr og premier til tjenester og transport. Følg med her, eller ta kontakt for å høre hva vi trenger akkurat nå."
+  />
+
+  <FeatureSection
+    id="ta-kontakt"
+    illustration={vaultBoy}
+    illustrationScale={9}
+    heading="Ta kontakt"
+    body="Vil du sponse, donere eller samarbeide med The Convention? Ta kontakt, så finner vi en løsning sammen."
+    ctaLabel="Send e-post"
+    ctaHref={`mailto:${site.org.email}`}
+    reverse
+    bg="panel"
+  />
+</BaseLayout>

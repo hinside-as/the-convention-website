@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnchorNav from "../components/layout/AnchorNav.astro";
+import VideoHero from "../components/sections/VideoHero.astro";
+import Button from "../components/ui/Button.astro";
+import ProgramDay from "../components/ui/ProgramDay.astro";
+import { programDays } from "../data/program";
+import { site } from "../data/site";
+
+// ASCII day slugs for anchor ids (æøå-safe).
+const slugify: Record<string, string> = {
+  Fredag: "fredag",
+  Lørdag: "lordag",
+  Søndag: "sondag",
+  Mandag: "mandag",
+  Tirsdag: "tirsdag",
+  Onsdag: "onsdag",
+};
+
+const anchorItems = programDays.map((day) => ({
+  id: slugify[day.weekday] ?? day.weekday.toLowerCase(),
+  label: `${day.weekday} ${day.dateLabel}`,
+}));
+---
+
+<BaseLayout
+  title="Program"
+  description="Se hele programmet for The Convention – dag for dag med konkurranser, show og aktiviteter."
+>
+  <VideoHero />
+
+  <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+    <h1 class="font-title text-3xl font-black text-cyan-100">Program</h1>
+    <div class="mt-4">
+      <AnchorNav items={anchorItems} />
+    </div>
+  </div>
+
+  <section class="mx-auto flex max-w-4xl flex-col gap-8 px-4 py-24 sm:px-6">
+    {
+      programDays.map((day) => (
+        <ProgramDay day={day} id={slugify[day.weekday] ?? day.weekday.toLowerCase()} />
+      ))
+    }
+  </section>
+
+  <section class="reveal bg-purple-900 py-32 text-center">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      <h2 class="font-title text-2xl font-black text-cyan-100">Hvordan delta?</h2>
+      <p class="mt-5 font-body text-lg text-cyan-100">
+        Alle påmeldinger skjer via vår Discord-server, der du finner kanalen #competitions med enkel veiledning for
+        hvordan du blir med – programmet oppdateres fortløpende frem mot eventet.
+      </p>
+      <Button href={site.links.discordSignup} external class="mt-8 inline-flex">Påmelding på Discord</Button>
+    </div>
+  </section>
+</BaseLayout>

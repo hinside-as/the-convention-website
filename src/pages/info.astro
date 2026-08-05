@@ -1,0 +1,250 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnchorNav from "../components/layout/AnchorNav.astro";
+import Illustration from "../components/ui/Illustration.astro";
+import { site } from "../data/site";
+
+import treasureMap from "../assets/illustrations/treasure-map.svg?raw";
+import play from "../assets/illustrations/play.svg?raw";
+import vaultBoy from "../assets/illustrations/vault-boy.svg?raw";
+import hotdog from "../assets/illustrations/hotdog.svg?raw";
+import amongUs from "../assets/illustrations/among-us.svg?raw";
+import counterStrike from "../assets/illustrations/counter-strike.svg?raw";
+import lightBulb from "../assets/illustrations/light-bulb.svg?raw";
+import punchOut from "../assets/illustrations/punch-out.svg?raw";
+
+const anchorItems = [
+  { id: "tid-og-sted", label: "Tid og sted" },
+  { id: "billetter", label: "Billetter og innsjekk" },
+  { id: "aldersgrenser", label: "Aldersgrenser og trygghet" },
+  { id: "mat-og-drikke", label: "Mat og drikke" },
+  { id: "overnatting", label: "Overnatting og soveplasser" },
+  { id: "pakkeliste", label: "Pakkeliste og utstyr" },
+  { id: "foreldrehjornet", label: "Foreldrehjørnet" },
+  { id: "husregler", label: "Husregler og respekt" },
+];
+
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.venue.mapQuery)}&output=embed`;
+---
+
+<BaseLayout
+  title="Info"
+  description="Alt du trenger å vite før The Convention: tid og sted, billetter, aldersgrenser, mat, overnatting, pakkeliste og husregler."
+>
+  <div class="mx-auto max-w-4xl px-4 pt-16 sm:px-6">
+    <h1 class="text-center font-title text-3xl font-black text-cyan-100">Info</h1>
+    <div class="mt-4">
+      <AnchorNav items={anchorItems} />
+    </div>
+  </div>
+
+  <section id="tid-og-sted" class="reveal mt-20 scroll-mt-32 bg-purple-900">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center">
+          <Illustration raw={treasureMap} scale={6} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Tid og sted</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Når, hvor og hvor lenge kan vi game?</p>
+          <p class="mt-2 font-body text-cyan-100">
+            The Convention åpner dørene {site.event.doorsOpen.label} kl. {site.event.doorsOpen.time} og holder åpent
+            til {site.event.doorsClose.label} kl. {site.event.doorsClose.time}. Innsjekk starter når dørene åpnes –
+            så her er det bare å stille seg i kø med kompisene og rigge seg til for en helg full av eventyr, konk og
+            kos. Det er både gode parkeringsmuligheter og kort vei til busstopp.
+          </p>
+          <p class="mt-4 font-body font-bold text-cyan-100">Hvor skjer det?</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Vi samles som alltid i {site.venue.name} i {site.venue.city}.
+          </p>
+          <p class="mt-2 font-body text-cyan-100">
+            {site.venue.addressLine}<br />
+            {site.venue.postalCode} {site.venue.postalCity}
+          </p>
+        </div>
+      </div>
+      <iframe
+        class="mt-10 h-80 w-full rounded-2xl border-0"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src={mapEmbedSrc}
+        title={`Kart til ${site.venue.name}`}
+      ></iframe>
+    </div>
+  </section>
+
+  <section id="billetter" class="reveal scroll-mt-32 bg-purple-600">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center md:order-2">
+          <Illustration raw={play} scale={14} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Billetter og innsjekk</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Hvordan sikrer du deg plass på årets store happening?</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Billettene finner du på nettsiden vår, og de kommer i flere varianter – enten du vil campe hele helga med
+            full pakke, eller bare stikke innom som dagsgjest.
+          </p>
+          <p class="mt-4 font-body font-bold text-cyan-100">Når du ankommer:</p>
+          <ul class="mt-2 list-disc pl-6 font-body text-cyan-100">
+            <li>Finn frem billetten din (mobil eller papir – alt funker).</li>
+            <li>Sving innom innsjekken.</li>
+            <li>Få båndet ditt og finn din plass i hallen.</li>
+          </ul>
+          <p class="mt-4 font-body text-cyan-100">
+            Husk å hilse på naboen! Crewet står klare til å hjelpe med alt fra plassering til tekniske spørsmål.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aldersgrenser" class="reveal scroll-mt-32 bg-purple-950">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center">
+          <Illustration raw={vaultBoy} scale={8} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Aldersgrenser og trygghet</h2>
+          <p class="mt-4 font-body text-cyan-100">
+            The Convention er åpent for alle, men du må være selvstendig nok til å ta vare på deg selv under
+            arrangementet.
+          </p>
+          <ul class="mt-4 list-disc pl-6 font-body text-cyan-100">
+            <li>
+              Ingen aldersgrense, men vi anbefaler at yngre deltakere har en plan for mat, søvn og kontakt med
+              foresatte.
+            </li>
+            <li>Trygt miljø: Erfarne vakter og crew er til stede døgnet rundt.</li>
+            <li>Trenger du hjelp? Vi er alltid tilgjengelige – enten det gjelder en løs kabel eller litt hjemlengsel.</li>
+          </ul>
+          <p class="mt-4 font-body text-cyan-100">Hos oss skal alle føle seg trygge – både spillere og foreldre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mat-og-drikke" class="reveal scroll-mt-32 bg-purple-900">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center md:order-2">
+          <Illustration raw={hotdog} scale={5} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Mat og drikke</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Gamerfuel – hva er på menyen?</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Sulten mellom slagene? Vi har kiosk med alt du trenger for å holde energien oppe – varm mat, kalde
+            drikker, snacks og selvfølgelig noen søte fristelser.
+          </p>
+          <p class="mt-4 font-body font-bold text-cyan-100">Kan jeg ta med egen mat?</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Selvfølgelig! Ta gjerne med favorittnisten, men la primus og stormkjøkken ligge hjemme – vi holder det
+            enkelt og trygt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overnatting" class="reveal scroll-mt-32 bg-purple-600">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center">
+          <Illustration raw={amongUs} scale={7} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Overnatting og soveplasser</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Sove? På LAN? Ja, faktisk!</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Mellom intense matcher er det lov å hvile litt. Vi har flere soveområder hvor du kan rulle ut soveposen
+            og ta en respawn.
+          </p>
+          <p class="mt-4 font-body font-bold text-cyan-100">Husk å pakke:</p>
+          <ul class="mt-2 list-disc pl-6 font-body text-cyan-100">
+            <li>Liggeunderlag</li>
+            <li>Sovepose</li>
+            <li>Hodepute (eller sammenrullet hettegenser)</li>
+            <li>Dusjer og toaletter er åpne hele helga, så det er lett å holde seg fresh!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pakkeliste" class="reveal scroll-mt-32 bg-purple-950">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center md:order-2">
+          <Illustration raw={counterStrike} scale={6} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Pakkeliste og utstyr</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Alt du trenger for en episk helg</p>
+          <ul class="mt-2 list-disc pl-6 font-body text-cyan-100">
+            <li>Gaming-PC eller konsoll + skjerm</li>
+            <li>Headset (ingen høyttalere)</li>
+            <li>Nettverkskabel (minst 5 meter) – kan også kjøpes i shop</li>
+            <li>Strømpad (vi stiller med ett strømuttak per deltaker)</li>
+            <li>Sovepose, liggeunderlag og pute (for de som har tenkt å overnatte)</li>
+            <li>Toalettsaker og håndkle</li>
+            <li>Klesskift (gjerne en ekstra t-skjorte til finaledagen!)</li>
+            <li>Mobil + lader</li>
+            <li>Penger/kort til mat og merch</li>
+            <li>Eventuelt kostyme eller kreative prosjekter til konkurransene</li>
+          </ul>
+          <p class="mt-4 font-body text-magenta">
+            TC Protip: Merk utstyret ditt med navn – kabler har en tendens til å gå på vandring!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="foreldrehjornet" class="reveal scroll-mt-32 bg-purple-900">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center">
+          <Illustration raw={lightBulb} scale={5} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Foreldrehjørnet</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Til dere hjemme – vi tar ansvar</p>
+          <p class="mt-2 font-body text-cyan-100">
+            Vi vet at det er en stor greie å sende ungdommen på LAN for første gang. Heldigvis har vi gjort dette
+            siden 1995 og vet hva som skal til for å skape en trygg, inkluderende og morsom opplevelse.
+          </p>
+          <p class="mt-4 font-body text-cyan-100">
+            Vårt crew består av erfarne arrangører, mange av dem foreldre selv, og vi har alltid voksne vakter på
+            plass. Trenger du å komme i kontakt med oss eller barnet ditt underveis? Vakttelefonen vår er åpen hele
+            helga.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="husregler" class="reveal scroll-mt-32 bg-purple-600">
+    <div class="mx-auto max-w-4xl px-4 py-32 sm:px-6">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="flex justify-center md:order-2">
+          <Illustration raw={punchOut} scale={3} />
+        </div>
+        <div>
+          <h2 class="font-title text-2xl font-black text-cyan-100">Husregler og respekt</h2>
+          <p class="mt-4 font-body font-bold text-cyan-100">Et par enkle regler for en legendarisk helg</p>
+          <ul class="mt-2 list-disc pl-6 font-body text-cyan-100">
+            <li>Vær grei med andre – både folk og utstyr.</li>
+            <li>Nulltoleranse for rusmidler og alkohol.</li>
+            <li>Følg konkurransereglene og crewinstruksene.</li>
+            <li>Hold området ryddig – både på plassen din og i fellesområdene.</li>
+            <li>Streaming er forbudt uten arrangørens tillatelse.</li>
+            <li>Spør før du låner noe – folk elsker å hjelpe, men ingen liker ninja-looting.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import { site } from "../../data/site";
+
+export interface Props {
+  bg?: "default" | "panel";
+}
+
+const { bg = "default" } = Astro.props;
+
+const units: [string, string][] = [
+  ["days", "Dager"],
+  ["hours", "Timer"],
+  ["minutes", "Minutter"],
+  ["seconds", "Sekunder"],
+];
+---
+
+<section class:list={["reveal py-32 text-center", bg === "panel" && "bg-purple-900"]}>
+  <div id="countdown" data-target={site.event.countdownTarget} class="flex justify-center gap-8 sm:gap-14">
+    {
+      units.map(([unit, label]) => (
+        <div class="flex flex-col items-center">
+          <span data-unit={unit} class="font-pixel text-6xl text-cyan-100 sm:text-8xl">
+            --
+          </span>
+          <span class="mt-3 font-body text-sm uppercase tracking-wide text-cyan-200 sm:text-base">{label}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const el = document.getElementById("countdown");
+  if (el) {
+    const target = new Date(el.dataset.target ?? "").getTime();
+    const dayEl = el.querySelector('[data-unit="days"]');
+    const hourEl = el.querySelector('[data-unit="hours"]');
+    const minuteEl = el.querySelector('[data-unit="minutes"]');
+    const secondEl = el.querySelector('[data-unit="seconds"]');
+
+    const pad = (n: number) => n.toString().padStart(2, "0");
+
+    const tick = () => {
+      const diff = Math.max(0, target - Date.now());
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      if (dayEl) dayEl.textContent = pad(days);
+      if (hourEl) hourEl.textContent = pad(hours);
+      if (minuteEl) minuteEl.textContent = pad(minutes);
+      if (secondEl) secondEl.textContent = pad(seconds);
+
+      if (diff <= 0) clearInterval(interval);
+    };
+
+    tick();
+    const interval = setInterval(tick, 1000);
+  }
+</script>

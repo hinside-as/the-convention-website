@@ -1,0 +1,48 @@
+---
+import Illustration from "../ui/Illustration.astro";
+import Button from "../ui/Button.astro";
+
+export interface Props {
+  illustration: string;
+  illustrationScale: number;
+  heading: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaExternal?: boolean;
+  reverse?: boolean;
+  id?: string;
+  bg?: "default" | "panel";
+}
+
+const {
+  illustration,
+  illustrationScale,
+  heading,
+  body,
+  ctaLabel,
+  ctaHref,
+  ctaExternal = false,
+  reverse = false,
+  id,
+  bg = "default",
+} = Astro.props;
+---
+
+<section id={id} class:list={["reveal scroll-mt-32 py-32", bg === "panel" && "bg-purple-900"]}>
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
+    <div class:list={["flex justify-center", reverse && "md:order-2"]}>
+      <Illustration raw={illustration} scale={illustrationScale} />
+    </div>
+    <div>
+      <h2 class="font-title text-3xl font-black text-cyan-100">{heading}</h2>
+      <p class="mt-5 font-body text-lg text-cyan-100">{body}</p>
+      {ctaHref && ctaLabel && (
+        <Button href={ctaHref} external={ctaExternal} class="mt-8 inline-flex">
+          {ctaLabel}
+        </Button>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>

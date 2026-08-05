@@ -1,0 +1,36 @@
+---
+import Button from "../ui/Button.astro";
+import { site } from "../../data/site";
+
+export interface Props {
+  bg?: "default" | "panel";
+}
+
+const { bg = "default" } = Astro.props;
+---
+
+<section class:list={["reveal py-32 text-center", bg === "panel" && "bg-purple-900"]}>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 class="font-title text-3xl font-black text-cyan-100">Følg oss på Instagram</h2>
+
+    {
+      site.instagramWidgetId ? (
+        <iframe
+          src={`https://snapwidget.com/embed/${site.instagramWidgetId}`}
+          class="mx-auto mt-10 h-[480px] w-full max-w-4xl border-0"
+          loading="lazy"
+          title="Instagram-feed"
+        />
+      ) : (
+        <p class="mx-auto mt-10 max-w-md rounded-2xl bg-purple-600 p-6 font-body text-sm text-cyan-200">
+          Instagram-feed ikke koblet til ennå — legg til en SnapWidget-ID i <code>src/data/site.ts</code> (se
+          SETUP.md).
+        </p>
+      )
+    }
+
+    <Button href={site.links.instagramProfile} external class="mt-10 inline-flex">
+      Se mer og følg oss
+    </Button>
+  </div>
+</section>

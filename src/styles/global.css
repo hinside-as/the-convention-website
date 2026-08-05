@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Titles: Nunito Black */
+@import "@fontsource/nunito/900.css";
+/* Body: Nunito Sans, regular + bold (variable font covers both weights) */
+@import "@fontsource-variable/nunito-sans";
+/* Countdown timer + crew names: pixel font */
+@import "@fontsource/tiny5";
+
+/*
+  Brand color system — see STYLE.md for the full WCAG contrast table this
+  is derived from. Summary of the rules encoded below:
+  - cyan-* on purple-900/purple-950: 14.8-18.9:1, safe for body text.
+  - magenta on purple-900/purple-950: 5.95-6.44:1, safe for large/accent text only.
+  - magenta on purple-600: 2.49:1, NEVER pair.
+  - cyan-* on purple-600: 6.23-7.30:1, safe (purple-600 is a secondary panel bg).
+  - magenta on any cyan-*: 2.5-2.93:1, NEVER pair.
+  - purple-900/950 on cyan-*: 14.8-18.9:1, safe if a light panel is used.
+*/
+@theme {
+  --color-cyan-100: #d6ffff;
+  --color-cyan-200: #a8ffff;
+  --color-cyan-400: #00ffff;
+
+  --color-magenta: #ff00ff;
+
+  --color-purple-600: #940094;
+  --color-purple-900: #290029;
+  --color-purple-950: #140014;
+
+  --font-title: "Nunito", sans-serif;
+  --font-body: "Nunito Sans Variable", sans-serif;
+  --font-pixel: "Tiny5", monospace;
+}
+
+body {
+  background-color: var(--color-purple-950);
+  color: var(--color-cyan-100);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-title);
+  font-weight: 900;
+}
+
+/*
+  Scroll-triggered fade-in for major sections. `.reveal` starts hidden;
+  `revealObserver` in BaseLayout.astro adds `.is-visible` via
+  IntersectionObserver the first time a section enters the viewport.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

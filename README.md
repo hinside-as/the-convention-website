@@ -1,43 +1,22 @@
-# Astro Starter Kit: Minimal
+# The Convention — website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Astro + Tailwind marketing/event site for The Convention (Kristiansund LAN/gaming/cosplay event). Deployed to Cloudflare Pages.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+See [CLAUDE.md](./CLAUDE.md) for architecture and conventions, [STYLE.md](./STYLE.md) for the design system, [CONTENT.md](./CONTENT.md) for brand voice/vision/mission, and [SETUP.md](./SETUP.md) for the one-time email signup setup.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start local dev server at `localhost:4321` |
+| `npm run build` | Build production site to `./dist/` |
+| `npm run preview` | Preview the build locally |
+| `npx astro check` | Type-check the project |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Structure
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `src/data/` — typed content: sponsors, competitions, program schedule, nav/social links, site-wide facts (dates, venue, contact). No CMS — edit these files directly to change copy.
+- `src/components/` — `layout/` (Nav, Footer), `sections/` (page sections), `ui/` (buttons, cards).
+- `src/pages/` — the 6 routes: `/`, `/program`, `/konkurranser`, `/info`, `/stotte`, `/kontakt`.
+- `functions/` — Cloudflare Pages Function for the email signup form.

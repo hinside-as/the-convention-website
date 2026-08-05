@@ -1,0 +1,29 @@
+---
+export interface AnchorItem {
+  id: string;
+  label: string;
+}
+
+export interface Props {
+  items: AnchorItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Hurtighopp" class="sticky top-16 z-40 bg-[rgba(20,0,20,0.95)] py-3 backdrop-blur">
+  <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            class="cursor-pointer whitespace-nowrap font-body text-sm font-bold text-cyan-100 underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:text-magenta hover:decoration-magenta"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

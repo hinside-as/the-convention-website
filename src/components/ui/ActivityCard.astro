@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets";
+import type { OtherActivity } from "../../data/competitions";
+
+export interface Props {
+  activity: OtherActivity;
+}
+
+const { activity } = Astro.props;
+---
+
+<article class="flex flex-col gap-5 rounded-2xl bg-purple-600 p-8 sm:flex-row sm:items-start">
+  <Image src={activity.image} alt="" class="h-20 w-auto shrink-0" />
+  <div>
+    <h3 class="font-title text-xl font-black text-cyan-100">{activity.title}</h3>
+    {activity.body.map((paragraph) => <p class="mt-2 font-body text-cyan-100">{paragraph}</p>)}
+  </div>
+</article>

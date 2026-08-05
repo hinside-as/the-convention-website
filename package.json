@@ -1,5 +1,5 @@
 {
-  "name": "lonely-light",
+  "name": "the-convention",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,6 +12,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.1.6"
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/nunito-sans": "^5.3.0",
+    "@fontsource/nunito": "^5.3.0",
+    "@fontsource/tiny5": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.1.6",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@cloudflare/workers-types": "^5.20260801.1",
+    "typescript": "^6.0.3"
   }
 }

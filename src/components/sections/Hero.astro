@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../../assets/hero/hero-2026.webp";
+import Button from "../ui/Button.astro";
+import { site } from "../../data/site";
+---
+
+<section class="reveal mx-auto max-w-6xl px-4 pt-10 pb-20 sm:px-6 sm:pt-16">
+  <div class="relative aspect-[21/9] overflow-hidden rounded-3xl">
+    <Image
+      id="hero-parallax-image"
+      src={heroImage}
+      alt="The Convention 2026 billetter"
+      widths={[640, 1024, 1600, 2400]}
+      sizes="(min-width: 1152px) 1152px, 100vw"
+      class="absolute inset-x-0 -top-[22.5%] h-[145%] w-full object-cover will-change-transform"
+      priority
+    />
+    <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-purple-950/40">
+      <Button href={site.links.buyTicket} external hideArrow class="text-lg">Kjøp billett</Button>
+      <Button href="/stotte#slik-kan-du-stotte" variant="outline" class="text-lg">
+        Støtt The Convention
+      </Button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const heroImg = document.getElementById("hero-parallax-image");
+  const heroSection = heroImg?.closest("section");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (heroImg && heroSection && !prefersReducedMotion) {
+    // Max travel is a fraction of the hero's own rendered height, not a fixed
+    // px value — the image is oversized by 22.5% top/bottom (h-[145%]), so
+    // this must stay safely under that or the edges will show. Scales
+    // naturally with viewport (bigger hero = bigger, still-safe movement).
+    const MAX_OFFSET_RATIO = 0.18;
+    let ticking = false;
+
+    const update = () => {
+      const rect = heroSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = Math.min(Math.max((vh - rect.top) / (vh + rect.height), 0), 1);
+      const maxOffset = rect.height * MAX_OFFSET_RATIO;
+      const offset = (progress - 0.5) * 2 * maxOffset;
+      heroImg.style.transform = `translateY(${offset}px)`;
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    update();
+  }
+</script>

@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import type { Competition } from "../../data/competitions";
+import FactList from "./FactList.astro";
+
+export interface Props {
+  competition: Competition;
+}
+
+const { competition } = Astro.props;
+---
+
+<article class="reveal flex flex-col overflow-hidden rounded-2xl bg-purple-900">
+  <div class="relative aspect-[4/3] w-full overflow-hidden">
+    <Image src={competition.image} alt={competition.title} class="h-full w-full object-cover" />
+    {competition.imageCredit && (
+      <p class="absolute bottom-1 right-2 font-body text-xs text-cyan-100/70">{competition.imageCredit}</p>
+    )}
+  </div>
+  <div class="flex flex-1 flex-col gap-4 p-7">
+    <p class="font-body text-sm font-bold text-magenta">{competition.title}</p>
+    <h3 class="font-title text-xl font-black">{competition.heading}</h3>
+    <p class="font-body text-cyan-100">{competition.body}</p>
+    <FactList facts={competition.facts} />
+    {
+      competition.premier.length > 0 && (
+        <div class="mt-3 rounded-lg bg-purple-600 p-4">
+          <p class="mb-2 font-bold text-cyan-100">Premier</p>
+          <ul class="text-sm">
+            {competition.premier.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</article>

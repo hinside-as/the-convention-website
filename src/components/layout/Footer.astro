@@ -1,0 +1,68 @@
+---
+import logoRaw from "../../assets/brand/logo.svg?raw";
+import { footerNavColumn } from "../../data/nav";
+import { socialLinks } from "../../data/social";
+import { site } from "../../data/site";
+
+const logoSvg = logoRaw.replaceAll('fill="white"', 'fill="currentColor"');
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$/, "") === currentPath;
+---
+
+<footer class="bg-purple-950">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-5">
+    <a
+      href="/"
+      class="min-w-0 self-start text-cyan-100 transition-colors hover:text-magenta [&>svg]:h-[30px] [&>svg]:w-auto lg:col-span-2"
+      set:html={logoSvg}
+    />
+
+    <nav class="flex flex-col gap-4" aria-label="Footer-lenker">
+      {
+        footerNavColumn.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? "page" : undefined}
+            class:list={[
+              "cursor-pointer font-body transition-colors hover:text-magenta",
+              isActive(link.href) ? "text-magenta" : "text-cyan-100",
+            ]}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <nav class="flex flex-col gap-4" aria-label="Sosiale medier">
+      {
+        socialLinks.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer" class="cursor-pointer font-body text-cyan-100 transition-colors hover:text-magenta">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <address class="not-italic font-body text-cyan-100">
+      <a href={`tel:${site.org.phone}`} class="block cursor-pointer transition-colors hover:text-magenta">{site.org.phoneDisplay}</a>
+      <a href={`mailto:${site.org.email}`} class="block cursor-pointer transition-colors hover:text-magenta">{site.org.email}</a>
+      <p class="mt-4">
+        {site.org.addressLine}<br />
+        {site.org.postalCode} {site.org.postalCity}<br />
+        {site.org.country}
+      </p>
+      <a
+        href={`https://virksomhet.brreg.no/nb/oppslag/enheter/${site.org.orgNumber.replace(/\s/g, "")}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 block cursor-pointer text-sm text-cyan-100 transition-colors hover:text-magenta"
+      >
+        Org. nr. {site.org.orgNumber}
+      </a>
+    </address>
+  </div>
+</footer>

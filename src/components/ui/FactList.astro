@@ -1,0 +1,68 @@
+---
+import type { CompetitionFacts } from "../../data/competitions";
+
+export interface Props {
+  facts: CompetitionFacts;
+}
+
+const { facts } = Astro.props;
+
+const rows: [string, string | undefined][] = [
+  ["Tidspunkt", facts.tidspunkt],
+  ["Varighet", facts.varighet],
+  ["Spillmodus", facts.spillmodus],
+  ["Enhet(er)", facts.enhet],
+  ["Sted", facts.sted],
+];
+
+// Matches bare domains like "discord.gg/hPf8kPM" or "lichess.org/tournament/x"
+// so they can render as real links instead of plain text.
+const linkPattern = /^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i;
+const isLink = (value: string) => linkPattern.test(value.trim());
+---
+
+<dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm">
+  {
+    rows
+      .filter(([, value]) => value)
+      .map(([label, value]) => (
+        <>
+          <dt class="font-bold text-cyan-200">{label}:</dt>
+          <dd>
+            {value && isLink(value) ? (
+              <a
+                href={`https://${value.trim()}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cursor-pointer text-cyan-100 underline decoration-dotted underline-offset-2 transition-colors hover:text-magenta"
+              >
+                {value}
+              </a>
+            ) : (
+              value
+            )}
+          </dd>
+        </>
+      ))
+  }
+  <dt class="font-bold text-cyan-200">Påmelding:</dt>
+  <dd class="flex flex-col gap-1">
+    {
+      facts.pameldng.map((option) =>
+        isLink(option) ? (
+          <a
+            href={`https://${option.trim()}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-fit cursor-pointer text-cyan-100 underline decoration-dotted underline-offset-2 transition-colors hover:text-magenta"
+          >
+            {option}
+          </a>
+        ) : (
+          <span>{option}</span>
+        )
+      )
+    }
+  </dd>
+</dl>
+{facts.note && <p class="mt-3 text-sm text-magenta">{facts.note}</p>}

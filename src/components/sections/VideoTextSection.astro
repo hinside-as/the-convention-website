@@ -1,0 +1,65 @@
+---
+export interface Props {
+  bg?: "default" | "panel";
+}
+
+const { bg = "default" } = Astro.props;
+
+const vimeoId = "746292314";
+const thumbnailUrl = `https://vumbnail.com/${vimeoId}.jpg`;
+---
+
+<section class:list={["reveal py-32", bg === "panel" && "bg-purple-900"]}>
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
+    <div class="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl" id="video-facade" data-vimeo-id={vimeoId}>
+      <img src={thumbnailUrl} alt="" class="h-full w-full object-cover" loading="lazy" />
+      <div
+        class="absolute inset-0 bg-purple-950/55 transition-colors duration-300 group-hover:bg-purple-950/35"
+      >
+      </div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(148,0,148,0.85)] text-cyan-100 shadow-[0_4px_24px_rgba(0,0,0,0.4)] backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-magenta group-hover:text-purple-950"
+        >
+          <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-1">
+            <path d="M21 13L0.75 25.1244L0.75 0.875661L21 13Z" fill="currentColor" />
+          </svg>
+        </span>
+      </div>
+    </div>
+    <div>
+      <h2 class="font-title text-3xl font-black text-cyan-100">Der lidenskap og fellesskap møtes</h2>
+      <p class="mt-4 font-body text-lg text-cyan-100">
+        The Convention er Norges triveligste og mest ambisiøse samlingspunkt for gamere, cosplayere,
+        brettspillentusiaster og kreative sjeler. Her skapes nye vennskap, spennende konkurranser og minner for
+        livet — alt i trygge og godt organiserte rammer. Enten du er deltaker eller forelder, kan du være trygg på
+        at The Convention handler like mye om mestring, kreativitet og fellesskap som det handler om selve
+        spillingen.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const facade = document.getElementById("video-facade");
+
+  facade?.addEventListener(
+    "click",
+    () => {
+      const vimeoId = facade.dataset.vimeoId;
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
+      iframe.className = "h-full w-full";
+      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+      iframe.title = "The Convention";
+      // Replace only the facade's contents, not the facade element itself —
+      // the aspect-video/rounded-2xl/overflow-hidden classes live on this
+      // container, so swapping the whole element out (e.g. via replaceWith)
+      // drops them and the iframe renders at its raw default size with
+      // square corners.
+      facade.replaceChildren(iframe);
+      facade.classList.remove("group", "cursor-pointer");
+    },
+    { once: true }
+  );
+</script>

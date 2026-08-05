@@ -1,0 +1,51 @@
+---
+/**
+ * Renders one of the pixel-grid illustration SVGs from src/assets/illustrations/,
+ * remapping their literal hex fills onto the site's `--color-*` theme tokens
+ * (so a future palette swap in global.css's `@theme` cascades into every
+ * illustration automatically) and forcing the displayed size to a whole-number
+ * multiple of the SVG's native viewBox — these are vector reproductions of
+ * pixel art, one `<rect>` per "pixel", so any non-integer scale factor would
+ * misalign adjacent unit rects and blur the crisp grid.
+ */
+export interface Props {
+  raw: string;
+  scale: number;
+  class?: string;
+}
+
+const { raw, scale, class: className } = Astro.props;
+
+const viewBoxMatch = raw.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+if (!viewBoxMatch) {
+  throw new Error('Illustration: source SVG is missing a viewBox="0 0 W H" attribute');
+}
+const nativeWidth = parseFloat(viewBoxMatch[1]);
+const nativeHeight = parseFloat(viewBoxMatch[2]);
+const width = Math.round(nativeWidth * scale);
+const height = Math.round(nativeHeight * scale);
+
+const colorTokens: [RegExp, string][] = [
+  [/#290029/gi, "var(--color-purple-900)"],
+  [/#940094/gi, "var(--color-purple-600)"],
+  [/#140014/gi, "var(--color-purple-950)"],
+  [/#00ffff/gi, "var(--color-cyan-400)"],
+  [/#a8ffff/gi, "var(--color-cyan-200)"],
+  [/#d6ffff/gi, "var(--color-cyan-100)"],
+  [/#ff00ff/gi, "var(--color-magenta)"],
+];
+
+let svg = raw;
+for (const [pattern, variable] of colorTokens) {
+  svg = svg.replace(pattern, variable);
+}
+
+svg = svg.replace(/<svg[^>]*>/, (svgTag) => {
+  let tag = svgTag.replace(/width="[\d.]+"/, `width="${width}"`).replace(/height="[\d.]+"/, `height="${height}"`);
+  tag = tag.replace("<svg", `<svg aria-hidden="true" focusable="false" shape-rendering="crispEdges"`);
+  if (className) tag = tag.replace("<svg", `<svg class="${className}"`);
+  return tag;
+});
+---
+
+<Fragment set:html={svg} />

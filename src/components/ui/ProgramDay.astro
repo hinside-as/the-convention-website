@@ -1,0 +1,36 @@
+---
+import type { ProgramDay } from "../../data/program";
+
+export interface Props {
+  day: ProgramDay;
+  id?: string;
+}
+
+const { day, id } = Astro.props;
+---
+
+<section id={id} class="reveal scroll-mt-32 rounded-2xl bg-purple-900 p-7">
+  <h2 class="font-title text-2xl font-black text-cyan-100">{day.weekday} {day.dateLabel}</h2>
+  {
+    day.events.length > 0 ? (
+      <ul class="mt-5 flex flex-col gap-2">
+        {day.events.map((event) => (
+          <li class="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2 border-b border-purple-600 py-4 last:border-0 sm:grid-cols-[8rem_1fr_auto]">
+            <span class="col-start-1 row-start-1 font-pixel text-magenta">
+              {event.time}
+              {event.endTime && `–${event.endTime}`}
+            </span>
+            <span class="col-start-2 row-start-1 justify-self-end rounded-full bg-purple-600 px-2.5 py-0.5 font-pixel text-xs uppercase tracking-wide text-cyan-100 sm:col-start-3">
+              {event.crew}
+            </span>
+            <span class="col-span-2 row-start-2 font-body text-cyan-100 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+              {event.title}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-5 font-body text-cyan-200">Programmet for denne dagen kommer snart.</p>
+    )
+  }
+</section>

@@ -1,0 +1,25 @@
+---
+import Illustration from "../ui/Illustration.astro";
+import minecraftIllustration from "../../assets/illustrations/minecraft.svg?raw";
+import EmailSignupForm from "../ui/EmailSignupForm.astro";
+
+export interface Props {
+  bg?: "default" | "panel";
+}
+
+const { bg = "panel" } = Astro.props;
+---
+
+<section class:list={["reveal py-32 text-center", bg === "panel" && "bg-purple-900"]}>
+  <div class="mx-auto max-w-2xl px-4 sm:px-6">
+    <Illustration raw={minecraftIllustration} scale={10} class="mx-auto" />
+    <h2 class="mt-6 font-title text-3xl font-black text-cyan-100">Vil du være først til å vite hva som skjer?</h2>
+    <p class="mt-4 font-body text-lg text-cyan-100">
+      Bli med i The Convention sin høyest rangerte nerdetropp og få eksklusiv tilgang til updates, hemmelige
+      oppdrag og viktig info før, under og etter eventet.
+    </p>
+    <div class="mt-10">
+      <EmailSignupForm />
+    </div>
+  </div>
+</section>

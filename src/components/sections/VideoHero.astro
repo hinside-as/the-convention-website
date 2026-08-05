@@ -1,0 +1,31 @@
+---
+export interface Props {
+  /** Omit until a real video file is supplied — renders a placeholder meanwhile. */
+  videoSrc?: string;
+  poster?: string;
+}
+
+const { videoSrc, poster } = Astro.props;
+---
+
+<section class="reveal mx-auto max-w-6xl px-4 pt-10 pb-20 sm:px-6 sm:pt-16">
+  <div class="relative aspect-[21/9] overflow-hidden rounded-3xl bg-purple-900">
+    {
+      videoSrc ? (
+        <video
+          class="h-full w-full object-cover"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster={poster}
+          src={videoSrc}
+        />
+      ) : (
+        <div class="flex h-full w-full items-center justify-center">
+          <p class="font-body text-sm text-cyan-200">Video kommer snart</p>
+        </div>
+      )
+    }
+  </div>
+</section>

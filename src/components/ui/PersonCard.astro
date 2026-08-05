@@ -1,0 +1,23 @@
+---
+export interface Props {
+  name?: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+}
+
+const { name = "Navn kommer", role, email, phone } = Astro.props;
+---
+
+<div class="flex flex-col items-center text-center">
+  <div class="flex h-24 w-24 items-center justify-center rounded-full bg-purple-600">
+    <svg viewBox="0 0 24 24" fill="none" class="h-12 w-12 text-cyan-100" aria-hidden="true">
+      <circle cx="12" cy="8" r="4" fill="currentColor" />
+      <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </div>
+  <p class="mt-3 font-title text-base font-black text-cyan-100">{name}</p>
+  {role && <p class="font-pixel text-sm text-magenta">{role}</p>}
+  {email && <p class="mt-1 font-body text-xs text-cyan-200">{email}</p>}
+  {phone && <p class="font-body text-xs text-cyan-200">{phone}</p>}
+</div>

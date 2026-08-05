@@ -1,0 +1,45 @@
+---
+export interface Props {
+  href: string;
+  variant?: "primary" | "outline";
+  size?: "md" | "sm" | "xs";
+  external?: boolean;
+  /** Hide the trailing ↗ even when `external` is true (e.g. Kjøp billett). */
+  hideArrow?: boolean;
+  class?: string;
+}
+
+const { href, variant = "primary", size = "md", external = false, hideArrow = false, class: className } = Astro.props;
+
+const base =
+  "inline-flex cursor-pointer items-center gap-2 rounded-full font-title font-black uppercase tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-100";
+
+const sizes = {
+  md: "px-6 py-3",
+  sm: "px-4 py-2 text-sm",
+  // Used only by the nav CTA, which renders once but appears in both the
+  // full-screen mobile menu (needs to read at the same scale as the other
+  // text-2xl nav links) and the compact inline desktop nav (small badge
+  // next to the links) — so this size is responsive by itself rather than
+  // a single fixed value.
+  xs: "px-8 py-4 text-2xl lg:px-3 lg:py-1.5 lg:text-xs",
+};
+
+const variants = {
+  // Dark, translucent "glass" fill (matches the nav bar's own treatment) with
+  // light text — more legible than light-bg/dark-text at a glance, and the
+  // vivid magenta is saved for the hover state. See STYLE.md.
+  primary: "bg-[rgba(148,0,148,0.85)] text-cyan-100 backdrop-blur-md hover:bg-magenta hover:text-purple-950",
+  outline: "border-2 border-cyan-100 bg-[rgba(20,0,20,0.5)] text-cyan-100 backdrop-blur-md hover:bg-cyan-100 hover:text-purple-950",
+};
+---
+
+<a
+  href={href}
+  class:list={[base, sizes[size], variants[variant], className]}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+>
+  <slot />
+  {external && !hideArrow && <span aria-hidden="true">↗</span>}
+</a>
