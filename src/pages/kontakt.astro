@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import AnchorNav from "../components/layout/AnchorNav.astro";
 import PersonCard from "../components/ui/PersonCard.astro";
 import { site } from "../data/site";
+import { crew, styret } from "../data/people";
 import type { CrewName } from "../data/program";
 
 const anchorItems = [
@@ -16,10 +17,11 @@ const officeMapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.or
 const eventMapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.venue.mapQuery)}&output=embed`;
 const orgLookupUrl = `https://virksomhet.brreg.no/nb/oppslag/enheter/${site.org.orgNumber.replace(/\s/g, "")}`;
 
-const styretSeats = Array.from({ length: 6 });
+/** 6 board seats total; unfilled ones fall back to a placeholder PersonCard. */
+const emptyStyretSeats = Array.from({ length: Math.max(0, 6 - styret.length) });
 
-/** Every crew except Core, which doesn't get a public crew-lead listing. */
 const crewNames: CrewName[] = [
+  "Core",
   "Cosplay",
   "Design",
   "Game",
@@ -104,14 +106,36 @@ const crewNames: CrewName[] = [
   <section id="styret" class="reveal mx-auto max-w-4xl scroll-mt-32 px-4 py-28 text-center sm:px-6">
     <h2 class="font-title text-2xl font-black text-cyan-100">Styret</h2>
     <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3">
-      {styretSeats.map(() => <PersonCard />)}
+      {
+        styret.map((person) => (
+          <PersonCard name={person.name} photo={person.photo} email={person.email} phone={person.phoneDisplay} />
+        ))
+      }
+      {emptyStyretSeats.map(() => <PersonCard />)}
     </div>
   </section>
 
   <section id="crew" class="reveal mx-auto max-w-5xl scroll-mt-32 px-4 pb-24 text-center sm:px-6">
     <h2 class="font-title text-2xl font-black text-cyan-100">Crew</h2>
     <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-5">
-      {crewNames.map((crew) => <PersonCard role={crew} email="E-post kommer" phone="Telefon kommer" />)}
+      {
+        crewNames.map((crewName) => {
+          const members = crew.filter((person) => person.role === crewName);
+          return members.length > 0 ? (
+            members.map((person) => (
+              <PersonCard
+                name={person.name}
+                role={person.role}
+                photo={person.photo}
+                email={person.email}
+                phone={person.phoneDisplay}
+              />
+            ))
+          ) : (
+            <PersonCard role={crewName} />
+          );
+        })
+      }
     </div>
   </section>
 </BaseLayout>
