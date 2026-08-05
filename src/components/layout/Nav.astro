@@ -11,7 +11,7 @@ const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$
 
 <header
   id="site-nav"
-  class="fixed inset-x-0 top-0 z-50 bg-[rgba(20,0,20,0.92)] shadow-[0_1px_24px_rgba(0,0,0,0.35)] backdrop-blur-lg transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+  class="fixed inset-x-0 top-0 z-50 bg-[rgba(20,0,20,0.92)] backdrop-blur-lg transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
 >
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
     <a
@@ -50,7 +50,7 @@ const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$
           </a>
         ))
       }
-      <Button href={ticketCta.href} external={ticketCta.external} hideArrow size="xs" class="order-first lg:order-none">
+      <Button href={ticketCta.href} external={ticketCta.external} hideArrow size="xs" class="lg:hidden">
         {ticketCta.label}
       </Button>
     </div>
@@ -70,6 +70,8 @@ const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$
     const onScroll = () => {
       const currentY = window.scrollY;
 
+      nav.classList.toggle("shadow-[0_1px_24px_rgba(0,0,0,0.35)]", currentY > 0);
+
       if (!navToggle.checked) {
         if (currentY > lastY && currentY > HIDE_THRESHOLD) {
           nav.style.transform = "translateY(-100%)";
@@ -81,6 +83,8 @@ const isActive = (href: string) => !href.startsWith("http") && href.replace(/\/$
       lastY = currentY;
       ticking = false;
     };
+
+    onScroll();
 
     window.addEventListener("scroll", () => {
       if (!ticking) {
