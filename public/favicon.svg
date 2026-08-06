@@ -1,19 +1,8 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="32" height="32" fill="#290029"/>
-<rect x="20" y="11" width="2" height="2" fill="#00FFFF"/>
-<rect x="18" y="11" width="2" height="2" fill="#00FFFF"/>
-<rect x="22" y="17" width="2" height="2" fill="#00FFFF"/>
-<rect x="20" y="19" width="2" height="2" fill="#00FFFF"/>
-<rect x="12" y="11" width="2" height="2" fill="#00FFFF"/>
-<rect x="18" y="19" width="2" height="2" fill="#00FFFF"/>
-<rect x="10" y="19" width="2" height="2" fill="#00FFFF"/>
-<rect x="16" y="17" width="2" height="2" fill="#00FFFF"/>
-<rect x="16" y="15" width="2" height="2" fill="#00FFFF"/>
-<rect x="22" y="13" width="2" height="2" fill="#00FFFF"/>
-<rect x="16" y="13" width="2" height="2" fill="#00FFFF"/>
-<rect x="10" y="17" width="2" height="2" fill="#00FFFF"/>
-<rect x="10" y="15" width="2" height="2" fill="#00FFFF"/>
-<rect x="10" y="13" width="2" height="2" fill="#00FFFF"/>
-<rect x="10" y="11" width="2" height="2" fill="#00FFFF"/>
-<rect x="8" y="11" width="2" height="2" fill="#00FFFF"/>
+<path d="M12 6V10H8V26H4V10H0V6H12Z" fill="#808080"/>
+<path d="M28 26H20V22H28V26Z" fill="#808080"/>
+<path d="M20 22H16V10H20V22Z" fill="#808080"/>
+<path d="M32 22H28V18H32V22Z" fill="#808080"/>
+<path d="M32 14H28V10H32V14Z" fill="#808080"/>
+<path d="M28 10H20V6H28V10Z" fill="#808080"/>
 </svg>
