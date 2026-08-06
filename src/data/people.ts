@@ -3,6 +3,8 @@ import type { ImageMetadata } from "astro";
 import type { CrewName } from "./program";
 
 import andreaHaga from "../assets/crew/andrea-haga.webp";
+import endreGustad from "../assets/crew/endre-gustad.webp";
+import gabrielMarholm from "../assets/crew/gabriel-marholm.webp";
 import janEllingHolstad from "../assets/crew/jan-elling-holstad.webp";
 import marenoSteira from "../assets/crew/mareno-steira.webp";
 import martinKippervik from "../assets/crew/martin-kippervik.webp";
@@ -44,6 +46,12 @@ export const styret: Person[] = [
     phoneDisplay: "994 56 634",
     email: "mareno.steira@convention.no",
   },
+  {
+    name: "Endre Gustad",
+    photo: endreGustad,
+    phoneDisplay: "992 81 628",
+    email: "endre.gustad@convention.no",
+  },
 ];
 
 /** One entry per crew lead with a submitted photo; a crew with no entry here falls back to a placeholder PersonCard. */
@@ -54,6 +62,13 @@ export const crew: CrewMember[] = [
     photo: andreaHaga,
     phoneDisplay: "948 98 146",
     email: "andrea.haga@convention.no",
+  },
+  {
+    name: "Gabriel Marholm",
+    role: "Core",
+    photo: gabrielMarholm,
+    phoneDisplay: "400 54 991",
+    email: "gabriel.marholm@convention.no",
   },
   {
     name: "Jan Elling Holstad",
