@@ -12,6 +12,7 @@ import martiniusTelsto from "../assets/crew/martinius-telsto.webp";
 import runeStene from "../assets/crew/rune-stene.webp";
 import sindreDahl from "../assets/crew/sindre-dahl.webp";
 import sveinOskarSmevag from "../assets/crew/svein-oskar-smevag.webp";
+import tirilSkjolsvik from "../assets/crew/tiril-skjolsvik.webp";
 import torEgilBaeverfjord from "../assets/crew/tor-egil-baeverfjord.webp";
 import vidarSmevag from "../assets/crew/vidar-smevag.webp";
 
@@ -51,6 +52,12 @@ export const styret: Person[] = [
     photo: endreGustad,
     phoneDisplay: "992 81 628",
     email: "endre.gustad@convention.no",
+  },
+  {
+    name: "Tiril Skjølsvik",
+    photo: tirilSkjolsvik,
+    phoneDisplay: "947 87 027",
+    email: "tiril.skjolsvik@convention.no",
   },
 ];
 
@@ -118,5 +125,12 @@ export const crew: CrewMember[] = [
     photo: torEgilBaeverfjord,
     phoneDisplay: "454 43 777",
     email: "tor-egil.baeverfjord@convention.no",
+  },
+  {
+    name: "Tiril Skjølsvik",
+    role: "Cosplay",
+    photo: tirilSkjolsvik,
+    phoneDisplay: "947 87 027",
+    email: "tiril.skjolsvik@convention.no",
   },
 ];
