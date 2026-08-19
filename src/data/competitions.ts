@@ -130,7 +130,7 @@ export const competitions: Competition[] = [
       tidspunkt: "Mandag 13:00–16:00",
       varighet: "3 timer",
       spillmodus: "Solo",
-      enhet: "PC, Xbox, Nintendo Switch, telefon (ikke PlayStation)",
+      enhet: "PC, Xbox, Nintendo Switch, telefon",
       pameldng: standardSignup,
     },
     premier: [],

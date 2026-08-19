@@ -19,6 +19,8 @@ export interface ProgramEvent {
   /** Which crew owns the activity — not a physical location, see STYLE.md. */
   crew: CrewName | "Hele arrangementet";
   title: string;
+  /** Platform(s) it's played on — Game entries only, e.g. "PC" or "Xbox, PC". */
+  system?: string;
 }
 
 export interface ProgramDay {
@@ -48,11 +50,11 @@ export const programDays: ProgramDay[] = [
     weekday: "Lørdag",
     dateLabel: "3. oktober",
     events: [
-      { time: "13:00", endTime: "14:00", crew: "Scene", title: "Quiz" },
+      { time: "13:00", endTime: "14:00", crew: "Scene", title: "Quizvention" },
       { time: "14:00", endTime: "15:30", crew: "Laser tag", title: "Laser tag åpent" },
       { time: "15:00", endTime: "17:30", crew: "Game", title: "Conventions Beste Gamer" },
       { time: "15:30", endTime: "17:30", crew: "Laser tag", title: "Compo" },
-      { time: "17:30", endTime: "20:30", crew: "Game", title: "Fortnite – Duo Build" },
+      { time: "17:30", endTime: "20:30", crew: "Game", title: "Fortnite – Duo Build", system: "Alle kompatible enheter" },
       { time: "21:00", endTime: "23:30", crew: "Laser tag", title: "Laser tag åpent" },
     ],
   },
@@ -60,7 +62,7 @@ export const programDays: ProgramDay[] = [
     weekday: "Søndag",
     dateLabel: "4. oktober",
     events: [
-      { time: "14:00", endTime: "18:00", crew: "Game", title: "Smash Bros. Ultimate" },
+      { time: "14:00", endTime: "18:00", crew: "Game", title: "Smash Bros. Ultimate", system: "Nintendo Switch 2" },
       { time: "15:00", endTime: "17:30", crew: "Game", title: "Conventions Beste Gamer" },
       { time: "15:00", endTime: "17:30", crew: "Laser tag", title: "Laser tag åpent" },
       { time: "17:30", endTime: "18:30", crew: "Laser tag", title: "Compo" },
@@ -73,11 +75,11 @@ export const programDays: ProgramDay[] = [
     weekday: "Mandag",
     dateLabel: "5. oktober",
     events: [
-      { time: "13:00", endTime: "16:00", crew: "Game", title: "Minecraft Creative" },
+      { time: "13:00", endTime: "16:00", crew: "Game", title: "Minecraft Creative", system: "PC, Xbox, Nintendo Switch, telefon" },
       { time: "14:00", endTime: "15:30", crew: "Scene", title: "Pillow Fight Night" },
       { time: "14:00", endTime: "16:00", crew: "Laser tag", title: "Laser tag åpent" },
       { time: "16:00", endTime: "17:00", crew: "Cosplay", title: "Beste kostyme" },
-      { time: "16:30", endTime: "22:30", crew: "Game", title: "Counter Strike 2: Wingman" },
+      { time: "16:30", endTime: "22:30", crew: "Game", title: "Counter Strike 2: Wingman", system: "PC" },
       { time: "19:30", endTime: "22:00", crew: "Laser tag", title: "Laser tag åpent" },
     ],
   },

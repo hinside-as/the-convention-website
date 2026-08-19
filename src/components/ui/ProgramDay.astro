@@ -25,6 +25,7 @@ const { day, id } = Astro.props;
             </span>
             <span class="col-span-2 row-start-2 font-body text-cyan-100 sm:col-span-1 sm:col-start-2 sm:row-start-1">
               {event.title}
+              {event.system && <span class="block text-sm text-cyan-100/60">{event.system}</span>}
             </span>
           </li>
         ))}
