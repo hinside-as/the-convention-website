@@ -1,10 +1,6 @@
-interface Env {
-  SHEETS_WEBHOOK_URL: string;
-}
-
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export default async (request: Request) => {
   const form = await request.formData();
 
   // Honeypot: real users never fill this hidden field in.
@@ -17,11 +13,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return new Response("Invalid email", { status: 400 });
   }
 
-  if (!env.SHEETS_WEBHOOK_URL) {
+  const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
+  if (!webhookUrl) {
     return new Response("Signup is not configured yet", { status: 503 });
   }
 
-  const sheetResponse = await fetch(env.SHEETS_WEBHOOK_URL, {
+  const sheetResponse = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, submittedAt: new Date().toISOString() }),
