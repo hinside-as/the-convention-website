@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://convention.no/sitemap-index.xml

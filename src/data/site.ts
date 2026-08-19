@@ -8,6 +8,8 @@ export const site = {
     doorsClose: { label: "onsdag 7. oktober", time: "12:00" },
     /** ISO timestamp with explicit Europe/Oslo (CEST) offset for the countdown timer. */
     countdownTarget: "2026-10-02T17:00:00+02:00",
+    /** ISO timestamp for doors-close, matching countdownTarget's format — used in the Event JSON-LD's endDate. */
+    doorsCloseTarget: "2026-10-07T12:00:00+02:00",
   },
   venue: {
     name: "Braatthallen",

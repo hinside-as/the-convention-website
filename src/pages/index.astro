@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
 import VideoTextSection from "../components/sections/VideoTextSection.astro";
@@ -11,12 +12,54 @@ import GrasrotSection from "../components/sections/GrasrotSection.astro";
 import EmailSignupSection from "../components/sections/EmailSignupSection.astro";
 
 import amongUsIllustration from "../assets/illustrations/among-us.svg?raw";
+import heroImage from "../assets/hero/hero-2026.webp";
+import { site } from "../data/site";
+
+const eventImage = await getImage({ src: heroImage, width: 1200, height: 630 });
+const eventImageURL = new URL(eventImage.src, Astro.site);
+
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: `${site.name} 2026`,
+  startDate: site.event.countdownTarget,
+  endDate: site.event.doorsCloseTarget,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  location: {
+    "@type": "Place",
+    name: site.venue.name,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.venue.addressLine,
+      postalCode: site.venue.postalCode,
+      addressLocality: site.venue.postalCity,
+      addressCountry: "NO",
+    },
+  },
+  image: [eventImageURL.toString()],
+  description:
+    "Norges triveligste og mest ambisiøse samlingspunkt for gamere, cosplayere, brettspillentusiaster og kreative sjeler.",
+  organizer: {
+    "@type": "Organization",
+    name: site.name,
+    url: "https://convention.no",
+    email: site.org.email,
+  },
+  offers: {
+    "@type": "Offer",
+    url: site.links.buyTicket,
+    availability: "https://schema.org/InStock",
+  },
+};
 ---
 
 <BaseLayout
   title="Hjem"
   description="The Convention 2026 – Norges triveligste og mest ambisiøse samlingspunkt for gamere, cosplayere, brettspillentusiaster og kreative sjeler."
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(eventJsonLd)} />
+  <h1 class="sr-only">{site.name} – {site.tagline}</h1>
   <Hero />
   <VideoTextSection bg="panel" />
   <DateVenueBlock />

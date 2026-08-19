@@ -1,8 +1,10 @@
 ---
+import { getImage } from "astro:assets";
 import "../styles/global.css";
 import Nav from "../components/layout/Nav.astro";
 import Footer from "../components/layout/Footer.astro";
 import { site } from "../data/site";
+import heroImage from "../assets/hero/hero-2026.webp";
 
 // Preloaded so the browser fetches these before it discovers the need for
 // them via the stylesheet's @font-face rules — without this, the fallback
@@ -16,9 +18,15 @@ import tiny5Latin from "@fontsource/tiny5/files/tiny5-latin-400-normal.woff2?url
 export interface Props {
   title: string;
   description: string;
+  /** Defaults to the homepage hero image, cropped to the standard 1200x630 OG size. */
+  ogImage?: ImageMetadata;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage = heroImage } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const optimizedOgImage = await getImage({ src: ogImage, width: 1200, height: 630 });
+const ogImageURL = new URL(optimizedOgImage.src, Astro.site);
 ---
 
 <!doctype html>
@@ -31,7 +39,23 @@ const { title, description } = Astro.props;
     <link rel="preload" href={nunitoSansLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={tiny5Latin} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <title>{title} · The Convention</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:title" content={`${title} · The Convention`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} · The Convention`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
     {
       import.meta.env.PROD && (
         <>
@@ -49,8 +73,14 @@ const { title, description } = Astro.props;
     }
   </head>
   <body class="min-h-screen">
+    <a
+      href="#main-content"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-full focus-visible:bg-cyan-100 focus-visible:px-6 focus-visible:py-3 focus-visible:font-body focus-visible:font-bold focus-visible:text-purple-950"
+    >
+      Hopp til innhold
+    </a>
     <Nav />
-    <main class="pt-16">
+    <main id="main-content" class="pt-16">
       <slot />
     </main>
     <Footer />
