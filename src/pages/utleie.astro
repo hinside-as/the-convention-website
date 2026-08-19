@@ -1,21 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AnchorNav from "../components/layout/AnchorNav.astro";
+import FeatureSection from "../components/sections/FeatureSection.astro";
 import Button from "../components/ui/Button.astro";
 import { site } from "../data/site";
 
 const anchorItems = [
-  { id: "utstyr", label: "Hva kan du leie?" },
-  { id: "priser", label: "Priser" },
-  { id: "ta-kontakt", label: "Ta kontakt" },
-];
-
-const utstyr = [
-  "Laser tag-utstyr",
-  "3 x slush-maskiner (tre smaker på hver)",
-  "Sukkerspinnmaskin",
-  "Popcornmaskin",
-  "4 x 98\" TV-skjermer",
+  { id: "slush", label: "Slush" },
+  { id: "sukkerspinn", label: "Sukkerspinn" },
+  { id: "popcorn", label: "Popcorn" },
+  { id: "laser-tag", label: "Laser tag" },
+  { id: "skjermer", label: "Storskjermer" },
+  { id: "priser-og-kontakt", label: "Priser og kontakt" },
 ];
 ---
 
@@ -30,7 +26,7 @@ const utstyr = [
     </div>
   </div>
 
-  <section class="reveal mx-auto mt-20 max-w-4xl scroll-mt-32 px-4 text-center sm:px-6">
+  <section class="reveal mx-auto mt-20 max-w-3xl scroll-mt-32 px-4 text-center sm:px-6">
     <p class="font-body text-lg text-cyan-100">
       Har du lyst til å ta med litt av The Convention-stemningen til ditt eget arrangement? Vi leier ut deler av
       utstyret vårt – enten det er til bursdagsfeiring, firmafest, utdrikningslag eller en helt annen sammenkomst.
@@ -38,28 +34,74 @@ const utstyr = [
     </p>
   </section>
 
-  <section id="utstyr" class="reveal mx-auto mt-16 max-w-4xl scroll-mt-32 px-4 py-16 sm:px-6">
-    <h2 class="text-center font-title text-2xl font-black text-cyan-100">Hva kan du leie?</h2>
-    <ul class="mx-auto mt-6 flex max-w-sm flex-col gap-2 font-body text-cyan-100">
-      {utstyr.map((item) => <li class="list-disc pl-1 marker:text-magenta">{item}</li>)}
+  <FeatureSection
+    id="slush"
+    heading="Slush – BrainCooler V-AIR"
+    body="Tre separate 12-liters kammer gir 36 liter slush fordelt på tre smaker samtidig – perfekt når gjestene ikke blir enige om favoritten. Maskinen kommer ferdig programmert og er klar til bruk med en gang den er koblet til."
+    bg="panel"
+  >
+    <ul class="mt-4 list-disc pl-6 font-body text-cyan-100">
+      <li>3 x 12 liter – 36 liter totalt, tre smaker på én gang</li>
+      <li>1000W, med eget kjøle- og varmekretsløp for rask innfrysing</li>
+      <li>Lavere støynivå enn standardmodeller</li>
+      <li>Dryppbrett med indikator for når det må tømmes</li>
+      <li>Mål: 66 x 49 x 82 cm (b x d x h), vekt 70 kg</li>
     </ul>
-  </section>
+  </FeatureSection>
 
-  <section id="priser" class="reveal bg-purple-900 py-24 text-center">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="font-title text-2xl font-black text-cyan-100">Priser</h2>
-      <p class="mt-5 font-body text-lg text-cyan-100">
-        Priser og andre detaljer rundt utleien kommer snart – vi jobber med å få dette på plass. Ta gjerne kontakt i
-        mellomtiden, så avtaler vi det som trengs.
-      </p>
-    </div>
-  </section>
+  <FeatureSection
+    id="sukkerspinn"
+    heading="Sukkerspinnmaskin"
+    body="Klassisk sukkerspinnmaskin fra HENDI (1200W-serien) – enkel å bruke og rask i gang, med alt du trenger for å holde spinningen kontinuerlig."
+  >
+    <ul class="mt-4 list-disc pl-6 font-body text-cyan-100">
+      <li>Effekt: 1130W, 230V – kobles rett i vanlig stikkontakt</li>
+      <li>Avtakbar bolle i rustfritt stål</li>
+      <li>Innebygd skuff til pinner, sukker og fargestoff</li>
+      <li>Separate brytere for varme og spinning</li>
+      <li>Kompakt: 52 x 52 x 50 cm, vekt 11 kg</li>
+    </ul>
+  </FeatureSection>
 
-  <section id="ta-kontakt" class="reveal py-24 text-center">
+  <FeatureSection
+    id="popcorn"
+    heading="Popkornmaskin"
+    body="Ferske, varme popkorn rett fra maskinen – den lukten alene setter stemningen. Enkel å bruke og en garantert vinner hos både store og små arrangementer."
+    bg="panel"
+  />
+
+  <FeatureSection
+    id="laser-tag"
+    heading="Laser tag-utstyr"
+    body="Profesjonelt laser tag-utstyr fra LaserWar – samme type utstyr vi bruker i egen laser tag-arena på The Convention. Perfekt for å ta konkurransen med til eget arrangement."
+  >
+    <ul class="mt-4 list-disc pl-6 font-body text-cyan-100">
+      <li>Våpen og vester/hodebånd med innebygde treffsensorer</li>
+      <li>Klasse 1-sikker optikk – helt ufarlig for øynene</li>
+      <li>RGB-hodebånd med retningsvibrasjon, så du kjenner hvilken side du ble truffet fra</li>
+      <li>Digital flagg-/basestasjon med Wi-Fi og live kampstatistikk</li>
+    </ul>
+  </FeatureSection>
+
+  <FeatureSection
+    id="skjermer"
+    heading="98&quot; storskjermer"
+    body="Fire enorme 98-tommers TCL-skjermer – to TCL 98T8B og to TCL 98QLED780 – for gaming eller filmkveld i ekte storformat."
+    bg="panel"
+  >
+    <ul class="mt-4 list-disc pl-6 font-body text-cyan-100">
+      <li>4K UHD QLED med Google TV og støtte for Dolby Vision</li>
+      <li>98T8B: 144Hz-panel med HDMI 2.1, VRR og lav inputlag – ideelt for gaming</li>
+      <li>98QLED780: 60Hz-panel, like enormt lerret til film og presentasjoner</li>
+    </ul>
+  </FeatureSection>
+
+  <section id="priser-og-kontakt" class="reveal py-24 text-center">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="font-title text-2xl font-black text-cyan-100">Ta kontakt</h2>
+      <h2 class="font-title text-2xl font-black text-cyan-100">Priser og kontakt</h2>
       <p class="mt-5 font-body text-lg text-cyan-100">
-        Vil du leie utstyr til ditt arrangement? Send oss en e-post, så finner vi en løsning sammen.
+        Priser og andre detaljer rundt utleien kommer snart – vi jobber med å få dette på plass. Vil du leie noe til
+        ditt arrangement? Send oss en e-post i mellomtiden, så finner vi en løsning sammen.
       </p>
       <Button href={`mailto:${site.org.email}`} class="mt-8 inline-flex">Send e-post</Button>
     </div>

@@ -3,8 +3,9 @@ import Illustration from "../ui/Illustration.astro";
 import Button from "../ui/Button.astro";
 
 export interface Props {
-  illustration: string;
-  illustrationScale: number;
+  /** Omit while artwork isn't ready yet — the section renders single-column without it. */
+  illustration?: string;
+  illustrationScale?: number;
   heading: string;
   body: string;
   ctaLabel?: string;
@@ -30,10 +31,17 @@ const {
 ---
 
 <section id={id} class:list={["reveal scroll-mt-32 py-32", bg === "panel" && "bg-purple-900"]}>
-  <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 md:grid-cols-2 md:items-center md:gap-16">
-    <div class:list={["flex justify-center", reverse && "md:order-2"]}>
-      <Illustration raw={illustration} scale={illustrationScale} />
-    </div>
+  <div
+    class:list={[
+      "mx-auto px-4 sm:px-6",
+      illustration ? "grid max-w-6xl gap-12 md:grid-cols-2 md:items-center md:gap-16" : "max-w-3xl",
+    ]}
+  >
+    {illustration && (
+      <div class:list={["flex justify-center", reverse && "md:order-2"]}>
+        <Illustration raw={illustration} scale={illustrationScale ?? 1} />
+      </div>
+    )}
     <div>
       <h2 class="font-title text-3xl font-black text-cyan-100">{heading}</h2>
       <p class="mt-5 font-body text-lg text-cyan-100">{body}</p>
