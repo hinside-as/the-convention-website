@@ -34,7 +34,7 @@ const isLink = (value: string) => linkPattern.test(value.trim());
                 href={`https://${value.trim()}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="cursor-pointer text-cyan-100 underline decoration-dotted underline-offset-2 transition-colors hover:text-magenta"
+                class="cursor-pointer text-cyan-100 transition-colors hover:text-magenta"
               >
                 {value}
               </a>
@@ -54,7 +54,7 @@ const isLink = (value: string) => linkPattern.test(value.trim());
             href={`https://${option.trim()}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="w-fit cursor-pointer text-cyan-100 underline decoration-dotted underline-offset-2 transition-colors hover:text-magenta"
+            class="w-fit cursor-pointer text-cyan-100 transition-colors hover:text-magenta"
           >
             {option}
           </a>
