@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/layout/Nav.astro";
 import Footer from "../components/layout/Footer.astro";
+import { site } from "../data/site";
 
 // Preloaded so the browser fetches these before it discovers the need for
 // them via the stylesheet's @font-face rules — without this, the fallback
@@ -31,6 +32,21 @@ const { title, description } = Astro.props;
     <link rel="preload" href={tiny5Latin} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <title>{title} · The Convention</title>
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`} />
+          <script is:inline define:vars={{ gaId: site.gaMeasurementId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", gaId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body class="min-h-screen">
     <Nav />

@@ -41,4 +41,6 @@ export const site = {
    * connected to @_theconvention and pastes the widget ID here — see SETUP.md.
    */
   instagramWidgetId: "",
+  /** Google Analytics 4 measurement ID, carried over from the old Squarespace site. */
+  gaMeasurementId: "G-6H1FDL8HNN",
 } as const;
