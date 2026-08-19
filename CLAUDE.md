@@ -11,7 +11,7 @@ Read [STYLE.md](./STYLE.md) before touching layout, color, spacing, images, or a
 ## Architecture
 
 - **No CMS by design.** All copy and structured content lives in typed `src/data/*.ts` files (`site.ts`, `nav.ts`, `social.ts`, `sponsors.ts`, `competitions.ts`, `program.ts`). To change a sponsor, competition, program entry, date, or contact detail, edit the relevant data file directly — never hardcode content inside a `.astro` page/component.
-- **6 pages, fixed structure:** `/` (index), `/program`, `/konkurranser`, `/info` (practical info — named "Info" in nav, was "Praktisk info"), `/stotte` (sponsor/volunteer support), `/kontakt` (maps, contact details, Styret/crew leads). The footer's contact block is no longer an anchor target (no `id="kontakt"`) — the nav's "Kontakt" item links straight to the `/kontakt` page.
+- **7 pages, fixed structure:** `/` (index), `/program`, `/konkurranser`, `/info` (practical info — named "Info" in nav, was "Praktisk info"), `/stotte` (sponsor/volunteer support), `/utleie` (equipment rental — laser tag gear, slush/candy floss/popcorn machines, TVs), `/kontakt` (maps, contact details, Styret/crew leads). The footer's contact block is no longer an anchor target (no `id="kontakt"`) — the nav's "Kontakt" item links straight to the `/kontakt` page.
 - **Components split three ways** under `src/components/`:
   - `layout/` — `Nav`, `Footer`, `AnchorNav` (site chrome, present across pages)
   - `sections/` — one component per homepage section (`Hero`, `CountdownTimer`, `FeatureSection`, etc.), each self-contained and pulling its own data

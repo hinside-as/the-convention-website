@@ -11,6 +11,7 @@ export const primaryNav: NavLink[] = [
   { label: "Konkurranser", href: "/konkurranser" },
   { label: "Info", href: "/info" },
   { label: "Støtte", href: "/stotte" },
+  { label: "Utleie", href: "/utleie" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Shop", href: site.links.shop, external: true },
 ];
@@ -26,6 +27,7 @@ export const footerNavColumn: NavLink[] = [
   { label: "Konkurranser", href: "/konkurranser" },
   { label: "Info", href: "/info" },
   { label: "Støtte", href: "/stotte" },
+  { label: "Utleie", href: "/utleie" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Shop", href: site.links.shop, external: true },
 ];

@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AnchorNav from "../components/layout/AnchorNav.astro";
+import Button from "../components/ui/Button.astro";
+import { site } from "../data/site";
+
+const anchorItems = [
+  { id: "utstyr", label: "Hva kan du leie?" },
+  { id: "priser", label: "Priser" },
+  { id: "ta-kontakt", label: "Ta kontakt" },
+];
+
+const utstyr = [
+  "Laser tag-utstyr",
+  "3 x slush-maskiner (tre smaker på hver)",
+  "Sukkerspinnmaskin",
+  "Popcornmaskin",
+  "4 x 98\" TV-skjermer",
+];
+---
+
+<BaseLayout
+  title="Utleie"
+  description="Lei utstyr fra The Convention til eget arrangement – laser tag, slush, sukkerspinn, popcorn og store TV-skjermer."
+>
+  <div class="mx-auto max-w-4xl px-4 pt-16 text-center sm:px-6">
+    <h1 class="font-title text-3xl font-black text-cyan-100">Utleie</h1>
+    <div class="mt-4">
+      <AnchorNav items={anchorItems} />
+    </div>
+  </div>
+
+  <section class="reveal mx-auto mt-20 max-w-4xl scroll-mt-32 px-4 text-center sm:px-6">
+    <p class="font-body text-lg text-cyan-100">
+      Har du lyst til å ta med litt av The Convention-stemningen til ditt eget arrangement? Vi leier ut deler av
+      utstyret vårt – enten det er til bursdagsfeiring, firmafest, utdrikningslag eller en helt annen sammenkomst.
+      Ta kontakt, så finner vi ut hva som passer for dere.
+    </p>
+  </section>
+
+  <section id="utstyr" class="reveal mx-auto mt-16 max-w-4xl scroll-mt-32 px-4 py-16 sm:px-6">
+    <h2 class="text-center font-title text-2xl font-black text-cyan-100">Hva kan du leie?</h2>
+    <ul class="mx-auto mt-6 flex max-w-sm flex-col gap-2 font-body text-cyan-100">
+      {utstyr.map((item) => <li class="list-disc pl-1 marker:text-magenta">{item}</li>)}
+    </ul>
+  </section>
+
+  <section id="priser" class="reveal bg-purple-900 py-24 text-center">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h2 class="font-title text-2xl font-black text-cyan-100">Priser</h2>
+      <p class="mt-5 font-body text-lg text-cyan-100">
+        Priser og andre detaljer rundt utleien kommer snart – vi jobber med å få dette på plass. Ta gjerne kontakt i
+        mellomtiden, så avtaler vi det som trengs.
+      </p>
+    </div>
+  </section>
+
+  <section id="ta-kontakt" class="reveal py-24 text-center">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h2 class="font-title text-2xl font-black text-cyan-100">Ta kontakt</h2>
+      <p class="mt-5 font-body text-lg text-cyan-100">
+        Vil du leie utstyr til ditt arrangement? Send oss en e-post, så finner vi en løsning sammen.
+      </p>
+      <Button href={`mailto:${site.org.email}`} class="mt-8 inline-flex">Send e-post</Button>
+    </div>
+  </section>
+</BaseLayout>
