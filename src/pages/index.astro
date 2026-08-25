@@ -6,7 +6,6 @@ import VideoTextSection from "../components/sections/VideoTextSection.astro";
 import DateVenueBlock from "../components/sections/DateVenueBlock.astro";
 import CountdownTimer from "../components/sections/CountdownTimer.astro";
 import FeatureSection from "../components/sections/FeatureSection.astro";
-import InstagramSection from "../components/sections/InstagramSection.astro";
 import SponsorGrid from "../components/sections/SponsorGrid.astro";
 import GrasrotSection from "../components/sections/GrasrotSection.astro";
 import EmailSignupSection from "../components/sections/EmailSignupSection.astro";
@@ -72,8 +71,7 @@ const eventJsonLd = {
     ctaLabel="Les mer"
     ctaHref="/konkurranser"
   />
-  <InstagramSection bg="panel" />
-  <SponsorGrid bg="default" />
-  <GrasrotSection variant="home" bg="panel" />
-  <EmailSignupSection bg="default" />
+  <SponsorGrid bg="panel" />
+  <GrasrotSection variant="home" bg="default" />
+  <EmailSignupSection bg="panel" />
 </BaseLayout>

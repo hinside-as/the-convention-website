@@ -35,7 +35,7 @@ export const site = {
     buyTicket: "https://shop.convention.no/",
     discordSignup: "https://discord.com/invite/hPf8kPM",
     instagramProfile: "https://www.instagram.com/_theconvention",
-    grasrotandelen: "https://www.norsk-tipping.no/grasrotandelen/din-mottaker/988177180",
+    grasrotandelen: "https://www.norsk-tipping.no/grasrotandelen/mottaker/988177180",
   },
   /**
    * SnapWidget (or similar) embed widget ID for the homepage Instagram feed.
