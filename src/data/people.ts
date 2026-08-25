@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 import type { CrewName } from "./program";
 
 import andreaHaga from "../assets/crew/andrea-haga.webp";
+import camillaMyrset from "../assets/crew/camilla-myrset.webp";
 import endreGustad from "../assets/crew/endre-gustad.webp";
 import gabrielMarholm from "../assets/crew/gabriel-marholm.webp";
 import janEllingHolstad from "../assets/crew/jan-elling-holstad.webp";
@@ -13,6 +14,7 @@ import runeStene from "../assets/crew/rune-stene.webp";
 import sindreDahl from "../assets/crew/sindre-dahl.webp";
 import sveinOskarSmevag from "../assets/crew/svein-oskar-smevag.webp";
 import tirilSkjolsvik from "../assets/crew/tiril-skjolsvik.webp";
+import tomSverreWarvikJoo from "../assets/crew/tom-sverre-warvik-joo.webp";
 import torEgilBaeverfjord from "../assets/crew/tor-egil-baeverfjord.webp";
 import vidarSmevag from "../assets/crew/vidar-smevag.webp";
 
@@ -132,5 +134,19 @@ export const crew: CrewMember[] = [
     photo: tirilSkjolsvik,
     phoneDisplay: "947 87 027",
     email: "tiril.skjolsvik@convention.no",
+  },
+  {
+    name: "Tom Sverre Warvik Joø",
+    role: "Security",
+    photo: tomSverreWarvikJoo,
+    phoneDisplay: "980 55 359",
+    email: "tom-sverre.joo@convention.no",
+  },
+  {
+    name: "Camilla Myrset",
+    role: "Media",
+    photo: camillaMyrset,
+    phoneDisplay: "979 76 092",
+    email: "camilla.myrset@convention.no",
   },
 ];
